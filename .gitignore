@@ -1,0 +1,9 @@
+.env
+.DS_Store
+spec/fixtures/vcr_cassettes/*
+.idea/*
+/.bundle
+/vendor/bundle
+/log/*
+/tmp/*
+.rspec
