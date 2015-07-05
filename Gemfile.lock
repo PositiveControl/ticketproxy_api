@@ -1,28 +1,67 @@
+GIT
+  remote: git@github.com:teamsnap/omicron
+  revision: 1c234dff8560cf427456f5fc4b7691027535fdfa
+  specs:
+    omicron (0.1.2)
+      inflection (~> 1.0.0)
+      naught (~> 1.0.0)
+      oj (~> 2.10.0)
+      sinatra (~> 1.4.5)
+      virtus (~> 1.0.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (4.2.1)
+      i18n (~> 0.7)
+      json (~> 1.7, >= 1.7.7)
+      minitest (~> 5.1)
+      thread_safe (~> 0.3, >= 0.3.4)
+      tzinfo (~> 1.1)
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     celluloid (0.16.0)
       timers (~> 4.0.0)
     coderay (1.1.0)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.2.5)
     dotenv (0.11.1)
       dotenv-deployment (~> 0.0.2)
     dotenv-deployment (0.0.2)
+    equalizer (0.0.11)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.10)
     hitimes (1.2.2)
+    i18n (0.7.0)
+    ice_nine (0.11.1)
+    inflection (1.0.0)
+    json (1.8.2)
+    libxml-ruby (2.8.0)
     listen (2.10.1)
       celluloid (~> 0.16.0)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
     method_source (0.8.2)
+    mini_portile (0.6.2)
+    minitest (5.6.1)
     multipart-post (2.0.0)
-    omicron (0.0.1)
+    naught (1.0.0)
+    nokogiri (1.6.6.2)
+      mini_portile (~> 0.6.0)
+    oj (2.10.4)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    rack (1.6.4)
+    rack-protection (1.5.3)
+      rack
     rb-fsevent (0.9.5)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
@@ -41,17 +80,33 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.3.0)
     rspec-support (3.3.0)
+    sinatra (1.4.6)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (>= 1.3, < 3)
     slop (3.6.0)
+    thread_safe (0.3.5)
+    tilt (2.0.1)
     timers (4.0.1)
       hitimes
+    tzinfo (1.2.2)
+      thread_safe (~> 0.1)
+    virtus (1.0.5)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport
   dotenv
   faraday
-  omicron
+  libxml-ruby
+  nokogiri
+  omicron!
   pry
   rerun
   rspec

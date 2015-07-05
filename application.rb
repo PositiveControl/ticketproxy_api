@@ -1,12 +1,16 @@
+require 'omicron'
 require 'sinatra'
 require 'pipe'
 require 'JSON'
 require_relative 'lib/search'
 require 'pry'
 require 'dotenv'
+require_relative 'lib/search_serializer'
+require_relative 'lib/params_mapper'
 
 Dotenv.load
 
+# include Omicron.serialization(SearchSerializer)
 include Pipe
 
 get '/' do
@@ -14,61 +18,61 @@ get '/' do
 end
 
 get '/search' do
-  erb :results,
-    :locals => {
-      :results =>
-        pipe(params, :through => [:perform_search, :decorate])
-    }
+  pipe(params, :through => [:map_params, :perform_search, :serialize])
 end
 
 post '/search' do
-  erb :results,
-    :locals => {
-      :results =>
-        pipe(params, :through => [:perform_search, :decorate])
-    }
+  pipe(params, :through => [:map_params, :perform_search, :serialize])
 end
 
 get '/tickets' do
-  erb :ticket_results,
-    :locals => {
-      :results =>
-        pipe(params, :through => [:get_tickets])
-    }
+  pipe(params, :through => [:map_params, :get_tickets, :serialize])
 end
 
 get '/venue' do
-  erb :venue_results,
-    :locals => {
-      :results =>
-        pipe(params, :through => [:get_venue])
-    }
+  pipe(params, :through => [:map_params, :get_venue, :serialize])
 end
 
 get '/location' do
-  erb :location_results,
-    :locals => {
-      :results =>
-        pipe(params, :through => [:get_location])
-    }
+  pipe(params, :through => [:map_params, :get_location, :serialize])
+end
+
+get '/event' do
+  pipe(params, :through => [:map_params, :get_event, :serialize])
 end
 
 private
 
+def map_params(params)
+  ParamsMapper
+    .new(params)
+    .execute
+end
+
 def perform_search(params)
-  Search.perform(params)
+  Search.general_query(params)
 end
 
 def get_tickets(params)
-  Search.tickets(params)
+  Search.ticket_query(params)
 end
 
 def get_venue(params)
-  Search.venue(params)
+  Search.venue_query(params)
 end
 
 def get_location(params)
-  Search.location(params)
+  Search.location_query(params)
+end
+
+def get_event(params)
+  Search.event_query(params)
+end
+
+def serialize(params)
+  SearchSerializer
+    .new
+    .search_collection(params)
 end
 
 def decorate(params)
